@@ -50,7 +50,7 @@ class Client:
         res_time = datetime.now().time()
         while self.last_answered + 1 < self.req_counter:
             self.logger.info(f"{self.buffer[(self.last_answered + 1) % 10]}{res_time};(timeout);")
-            print("ignoring", self.last_answered, self.client_num)
+            # print("ignoring", self.last_answered, self.client_num)
             self.last_answered += 1
 
     def start_pinging(self):
@@ -89,10 +89,10 @@ class Client:
                     self.logger.info(f"{res_time};{msg};")
                 else:
                     req_num = int(msg[msg.find('/') + 1: msg.find(']')])
-                    print(f"answered to {req_num}", self.client_num)
+                    # print(f"answered to {req_num}", self.client_num)
                     while self.last_answered + 1 != req_num:
                         self.logger.info(f"{self.buffer[(self.last_answered + 1) % 10]}{res_time};(timeout);")
-                        print("ignoring", self.last_answered, self.client_num)
+                        # print("ignoring", self.last_answered, self.client_num)
                         self.last_answered += 1
                     self.logger.info(f"{self.buffer[req_num % 10]}{res_time};{msg};")
                     self.last_answered += 1
